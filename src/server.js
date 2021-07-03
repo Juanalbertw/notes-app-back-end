@@ -7,7 +7,9 @@ const routes = require('./routes');
 const init = async () => {
   const server = Hapi.server({
     port: 5000,
-    host: 'localhost',
+    // host saat development adalah localhost
+    // sedangkan host saat production adalah 0.0.0.0 agar bisa diakses melalui seluruh alamat IP
+    host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
     // mengaktifkan CORS di seluruh route yang ada di server
     routes: {
       cors: {
